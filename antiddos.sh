@@ -60,3 +60,8 @@ iptables -A port-scanning -j DROP
 #antibruteforce ssh
 iptables -A INPUT -p tcp --dport ssh -m conntrack --ctstate NEW -m recent --set 
 iptables -A INPUT -p tcp --dport ssh -m conntrack --ctstate NEW -m recent --update --seconds 60 --hitcount 10 -j DROP
+
+#povol ssh http a https
+iptables -A INPUT -m state --state NEW -p tcp --dport 22 -j ACCEPT
+iptables -A INPUT -m state --state NEW -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -m state --state NEW -p tcp --dport 443 -j ACCEPT
